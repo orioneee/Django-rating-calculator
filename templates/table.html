@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Ratings Table</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, #49a09d, #5f2c82);
+            font-family: sans-serif;
+            font-weight: 100;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .button_container {
+            margin-bottom: 20px; /* Add some spacing between button and table */
+        }
+
+        table {
+            border-radius: 20px;
+            width: 800px;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Add some spacing above the table */
+        }
+
+        th,
+        td {
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        thead {
+            th {
+                background-color: #55608f;
+            }
+        }
+
+        * {
+            user-select: none;
+        }
+
+        tbody {
+            td {
+                position: relative;
+            }
+        }
+
+        .btn {
+            background-color: #55608f;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .btn:hover {
+            background-color: #3e8e41;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="button_container">
+        <button onclick="window.location.href='/fill_rating'" class="btn btn-primary">
+            Fill Rating
+        </button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Position</th>
+            <th>Name</th>
+            {% for subject in subjects %}
+                <th>{{ subject.subject }}</th>
+            {% endfor %}
+            <th>Total Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.position }}</td>
+                <td>{{ record.name }}</td>
+                {% for subject in record.records %}
+                    <td>{{ subject }}</td>
+                {% endfor %}
+                <td>{{ record.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
