@@ -27,10 +27,12 @@ def index(request):
 def fillSubjects(request):
     RatingSubject.objects.all().delete()
     subjects = [
-        Subject("Вища математика", 6, True),
-        Subject("СУБД", 4, False),
-        Subject("ООП", 5, True),
-        Subject("ЕМТ", 5, True),
+        Subject("АМС", 5, True),
+        Subject("ОТЗП", 5, True),
+        Subject("Soft Skills", 4, True),
+        Subject("ЕМТ", 3, True),
+        Subject("Метрологія", 3, True),
+        Subject("ОМ", 5, True),
     ]
     print(subjects)
     for subject in subjects:
@@ -45,9 +47,9 @@ def login_view(request):
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return redirect("fillRating")
+            return redirect("fill_rating")
         else:
-            print("Invalid username or password")
+            return render(request, 'login.html', {"messages": ["Wrong username or password"]})
     else:
         return render(request, 'login.html')
 
